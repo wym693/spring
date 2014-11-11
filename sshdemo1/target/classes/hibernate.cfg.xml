@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+        
+<!--该文件不是项目必需的，用于根据entity生成数据库表，并做测试之用  -->
+<hibernate-configuration>
+	<session-factory>
+		<property name="hbm2ddl.auto">update</property>
+		<property name="dialect">org.hibernate.dialect.Oracle9Dialect</property>
+		<property name="connection.url">jdbc:oracle:thin:@localhost:1521:orclwen</property>
+		<property name="connection.username">admin</property>
+		<property name="connection.password">admin</property>
+		<property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+		<property name="show_sql">true</property>
+		<property name="hibernate.current_session_context_class">thread</property>
+		<property name="hibernate.cache.use_second_level_cache">true</property>
+		<property name="hibernate.cache.provider_class">
+			org.hibernate.cache.EhCacheProvider
+		</property>
+		<property name="hibernate.cache.use_query_cache">true</property><!--允许查询缓存 -->
+		<property name="hibernate.connection.isolation">2</property><!--事务隔离等级 -->
+		
+		<mapping class="com.pb.entity.Group"/>
+		<mapping class="com.pb.entity.User"/>
+	</session-factory>
+</hibernate-configuration>

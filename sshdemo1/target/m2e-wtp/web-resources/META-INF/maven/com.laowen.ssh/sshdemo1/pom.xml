@@ -1,0 +1,104 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.laowen.ssh</groupId>
+	<artifactId>sshdemo1</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<properties>
+		<spring.version>3.2.11.RELEASE</spring.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+	
+	   <!-- Spring核心 官网推荐的方式-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		
+      <!-- Spring核心  对象关系映射文件-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+	   
+ 		 <!-- hibernate的核心包-->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>3.6.9.Final</version>
+		</dependency>
+        	<!-- 用户本地依赖，需要在本地上传-->
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>6.0</version>
+		</dependency>
+		  
+		
+
+		<!-- 日志包-->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+
+
+
+		<!-- hibernate的依赖配置缓存-->
+		<dependency>
+			<groupId>ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+		
+		 <!-- hibernate的依赖操作字节码-->
+		<dependency>
+			<groupId>javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.11.0.GA</version>
+		</dependency>
+        <!-- hibernate的依赖二级缓存-->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-ehcache</artifactId>
+			<version>3.6.9.Final</version>
+		</dependency>
+
+		
+		
+        <!-- aop的共用包，织如代码 -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.7.2</version>
+		</dependency>
+
+
+       <!-- c3p0配置数据源 -->
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1.2</version>
+		</dependency>
+		<!-- 没有此包，看不了hibernate日志输出 -->
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-log4j12</artifactId>
+		    <version>1.7.7</version>
+		</dependency>
+
+	</dependencies>
+
+
+
+
+
+</project>

@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+           http://www.springframework.org/schema/tx 
+     	   http://www.springframework.org/schema/tx/spring-tx-3.1.xsd"
+     	   default-lazy-init="false"
+     	   default-autowire="no"
+     	   >
+    
+    <!--支持基于注解的配置方式，为@Autowired、@Resource、@PostConstruct、@PreDestroy注解提供支持 --> 	   
+    <context:annotation-config/>
+  	
+  	<!--支持annotation实现aop，并允许为没有实现接口的类实现切面  -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	
+	<bean id="dataSource" destroy-method="close"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<!--连接数据库的驱动类 -->
+		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>
+		<!--连接数据库的url -->
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:orclwen"/>
+		<!--连接数据库的用户名 -->
+		<property name="user" value="admin"/>
+		<!--连接数据库的密码 -->
+		<property name="password" value="admin"/>
+		<!--连接池的最大连接数 -->
+		<property name="maxPoolSize" value="40"/>
+		<!--连接池的最小连接数 -->
+		<property name="minPoolSize" value="1"/>
+		<!--初始化连接数 -->
+		<property name="initialPoolSize" value="1"/>
+		<!--连接的最大空闲时间，超时的连接将被丢弃，单位：秒 -->
+		<property name="maxIdleTime" value="60"/>
+		<!--没有连接可用时，等待连接的时间，单位：毫秒 -->
+		<property name="checkoutTimeout" value="2000"/>
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />		
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.generate_statistics">true</prop>
+				<prop key="hibernate.current_session_context_class">thread</prop>	
+				<prop key="hibernate.cache.use_second_level_cache">true</prop>
+				<prop key="hibernate.cache.provider_class">
+					org.hibernate.cache.EhCacheProvider
+				</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.connection.isolation">2</prop>
+			</props>
+		</property>
+		
+		<property name="packagesToScan">
+			<list>
+				<value>com.pb.entity</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="hibernateTemplate"
+		class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!--为baseDaoImpl注入hibernateTemplate  -->
+	<bean id="baseDao" class="org.springframework.orm.hibernate3.BaseDaoImpl" abstract="true">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	
+	<!--所有dao对象，注意dao需要继承baseDao  -->
+	<bean id="groupDao" class="com.pb.dao.impl.GroupDaoImpl" parent="baseDao"></bean>
+	<bean id="userDao" class="com.pb.dao.impl.UserDaoImpl" parent="baseDao"></bean>
+	
+	<!--所有service对象，注意service需要注入dao  -->
+	<bean id="groupService" class="com.pb.service.impl.GroupServiceImpl">
+		<property name="groupDao" ref="groupDao" />
+	</bean>
+	<bean id="userService" class="com.pb.service.impl.UserServiceImpl">
+		<property name="userDao" ref="userDao" />
+		<property name="groupDao" ref="groupDao" />
+	</bean>	
+</beans>
+
+
+
+
+
