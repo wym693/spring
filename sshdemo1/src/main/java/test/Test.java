@@ -1,5 +1,6 @@
 package test;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -55,9 +56,59 @@ public class Test {
 		//添加组
 //		test_addGroup();
 //		//查找所有组
-		test_searchAllGroups();
+//		test_searchAllGroups();
+		
+		//不需要添加事务利用hibernate_template的自动提交可以保存一个对象
+		
+//		addUser();
+		
+		//当同时在一个方法中进行两个对象的保存操作的时候，就需要通过显示事务来保证数据一并提交
+		addTwoGroup();
+		
 	}
 	
+	private static void addTwoGroup() {
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		//获得一个组
+		GroupService groupService = (GroupService)context.getBean("groupService");
+		
+		Group g1 = new Group(null, "普通会员",0);
+		Group g2 = new Group(null, "非会员",-1);//在Group类中已经添加了普通约束，人数的数量不能小于0
+		//在没有手动添加事务的情况下，一个正常提交，一个无法提交。
+		//这个时候需要添加事务，再执行一次
+	    groupService.addTowGroup(g1, g2);
+	    
+		
+		
+	}
+
+
+	
+
+
+	private static void addUser() {
+				
+		//保存后返回id
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		
+		GroupService groupService = (GroupService)context.getBean("groupService");
+		
+		Group group=(Group) groupService.searchUniqueResult("from Group where name=?", "管理员");
+		
+		UserService userServices=(UserService) context.getBean("userService");
+		
+		User user=new User("张三", "1234",group );
+		
+		userServices.add(user);
+		
+		
+		
+		
+		
+		
+	}
+
+
 	/*
 	 * 测试查询所有用户类型
 	 */

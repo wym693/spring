@@ -63,4 +63,10 @@ public class GroupServiceImpl implements GroupService {
 	public void ModifyUserNum(String id,Integer num){
 		this.groupDao.updateUserNum(id, num);
 	}
+
+	public void addTowGroup(Group g1,Group g2) {
+		this.groupDao.save(g1);
+		this.groupDao.save(g2);
+		
+	}
 }

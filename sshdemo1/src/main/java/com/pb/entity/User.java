@@ -29,6 +29,11 @@ public class User {
 		this.password = password;
 		this.group = group;
 	}
+	public User(String username,String password,Group group){
+		this.username = username;
+		this.password = password;
+		this.group = group;
+	}
 	
 	@Id 
 	@GeneratedValue(generator="system-uuid")

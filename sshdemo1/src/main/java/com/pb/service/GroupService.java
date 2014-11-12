@@ -21,4 +21,5 @@ public interface GroupService {
 	List searchBySQLQuery(String sql,Object... paras);
 	List searchByNamedParam(String hql,String[] paramNames,Object[] paras);
 	void ModifyUserNum(String id,Integer num);
+	void addTowGroup(Group g1,Group g2);
 }
