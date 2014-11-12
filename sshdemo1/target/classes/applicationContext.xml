@@ -107,6 +107,10 @@
 	        <tx:method name="set*" propagation="NEVER"/>
 	    </tx:attributes>
 	</tx:advice>
+	<aop:config>
+	   <aop:pointcut expression="execution(public * com.pb.service.impl.*.*(..))" id="txpointcut"/>
+	   <aop:advisor advice-ref="txAdvice" pointcut-ref="txpointcut"/>
+	</aop:config>
 	
 </beans>
 
