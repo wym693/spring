@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.ui.theme" value="simple" />
+    <constant name="struts.objectFactory.spring.autoWire" value="no" />
+    
+    <package name="default" namespace="/" extends="struts-default">
+		<action name="gotoAllUsers" class="userAction" method="gotoAllUsers">
+    		<result name="success">/allUsers.jsp</result>
+    	</action>
+    </package>
+    
+</struts>

@@ -112,6 +112,15 @@
 	   <aop:advisor advice-ref="txAdvice" pointcut-ref="txpointcut"/>
 	</aop:config>
 	
+	<!--所有action对象，注意action需要注入service  -->
+	<bean id="groupAction" class="com.pb.action.GroupAction" scope="prototype">
+		<property name="groupService" ref="groupService"></property>
+	</bean>
+	<bean id="userAction" class="com.pb.action.UserAction" scope="prototype">
+		<property name="userService" ref="userService"></property>
+		<property name="groupService" ref="groupService"></property>
+	</bean>
+	
 </beans>
 
 
