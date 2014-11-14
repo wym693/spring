@@ -35,7 +35,13 @@
 			<artifactId>spring-web</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		
+		 <!-- Spring 包含任务调度的支持-->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>
+		    <version>${spring.version}</version>
+		</dependency>
+				
 		
 	   
  		 <!-- hibernate的核心包-->
@@ -122,6 +128,13 @@
 			<artifactId>servlet-api</artifactId>
 			<version>2.4</version>
 			<scope>provided</scope>
+		</dependency>
+		
+		<!-- 任务调度包 -->
+		<dependency>
+		    <groupId>org.opensymphony.quartz</groupId>
+		    <artifactId>quartz-all</artifactId>
+		    <version>1.6.1</version>
 		</dependency>
 
 	</dependencies>
