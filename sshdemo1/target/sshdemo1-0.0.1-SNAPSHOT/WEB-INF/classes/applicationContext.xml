@@ -66,7 +66,7 @@
 	</bean>
 
 
-	<!-- 设计触发器 相当于设置闹钟的时间 -->
+	<!-- 设计触发器 相当于设置闹钟的时间 需要添加org.opensymphony.quartz下面quartz-all包 -->
 	<bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
 		<property name="jobDetail" ref="methodInvokingJobDetail"></property>
 		<property name="startDelay" value="5000"></property>
@@ -74,13 +74,23 @@
 		<property name="repeatCount" value="8"></property>
 
 	</bean>
+	
+	<!-- 当需求比较复杂的时候需要配置cron表达式 -->
+	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	     <property name="jobDetail" ref="methodInvokingJobDetail"></property>
+	     <property name="cronExpression" value="* * 09 25 11 ? 2014"></property>
+	     <property name="startDelay" value="5000"></property>
+	</bean>
+	
+	
 
 	<!-- 注册到系统，相当于启动闹钟 -->
 	<bean id="schedualFactoryBean"
 		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>
-				<ref local="simpleTrigger" />
+			<!-- 	<ref local="simpleTrigger" /> -->
+				<ref local="cronTrigger" />
 			</list>
 		</property>
 	</bean>

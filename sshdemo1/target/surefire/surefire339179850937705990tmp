@@ -1,0 +1,6 @@
+#surefire
+#Tue Nov 25 09:55:05 CST 2014
+jetty.port=8060
+user.dir=C\:\\Users\\wen\\Desktop\\pb_spirng_git\\spring\\sshdemo1
+localRepository=D\:\\repository
+basedir=C\:\\Users\\wen\\Desktop\\pb_spirng_git\\spring\\sshdemo1

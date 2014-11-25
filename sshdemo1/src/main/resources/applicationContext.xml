@@ -90,7 +90,7 @@
 		<property name="triggers">
 			<list>
 			<!-- 	<ref local="simpleTrigger" /> -->
-				<ref local="cronTrigger" />
+			<!--修改时间为当前时间后即可启动 	<ref local="cronTrigger" /> -->
 			</list>
 		</property>
 	</bean>
